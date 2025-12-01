@@ -1,0 +1,23 @@
+---
+title: "Data Management Final Project"
+author: "Tom Flachaire & Raphael Paillard"
+format: html
+---
+
+## Project description
+
+### Github link
+
+Please find the github link [here](https://github.com/tomflachaire/Infant_mortality/tree/main).
+
+### Sources links
+
+- 
+
+### Description of the sources
+
+### Research Question
+
+
+### Data cleaning description
+
