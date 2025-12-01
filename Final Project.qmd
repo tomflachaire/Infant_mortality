@@ -4,14 +4,6 @@ author: "Tom Flachaire & Raphael Paillard"
 format: html
 ---
 
-cd C:\Users\raphp\Documents\Dauphine\M1 AID\Data Management and Programing\DM
-git init
-git add .
-git commit -m "Premier commit : ajout du script R"
-git remote add origin https://github.com/tomflachaire/Infant_mortality.git
-git push -u origin main
-
-
 ## Project description
 
 ### Github link
