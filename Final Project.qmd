@@ -12,7 +12,18 @@ Please find the github link [here](https://github.com/tomflachaire/Infant_mortal
 
 ### Sources links
 
-- 
+https://www.insee.fr/fr/statistiques/7624538?sommaire=7624746&utm_
+
+With this link, we downloaded :
+
+- P3D – Indicateurs généraux de la population par département et région - Séries depuis 1990;
+
+- le P1D – Évolution générale de la situation démographique par département et région - Séries depuis 1990
+
+- et le P2D – Mortalité infantile par département et région - Séries depuis 1990.
+
+and we moved them to csv files only keeping the year 2019, the last year available before COVID, which might affect the result.
+
 
 ### Description of the sources
 
