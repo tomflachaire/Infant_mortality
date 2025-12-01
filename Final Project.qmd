@@ -44,6 +44,17 @@ Midwives RPPS 2012–2025 tracks the number and density of registered midwives a
 
 ### Research Question
 
+#### Why does infant mortality vary so much across French departments?
+
+This project examines the factors underlying variations in infant mortality rates across French departments, with a particular focus on the role of demographic characteristics and access to maternal healthcare. While France performs relatively well in terms of infant health at the national level, significant territorial disparities persist. Some departments consistently exhibit higher infant mortality rates than others, prompting questions about the underlying causes of these differences.
+
+Demographic indicators provided by INSEE—such as fertility rates, maternal age at childbirth, and the proportion of births outside marriage—offer valuable insights into the social and economic contexts in which children are born. These factors may influence pregnancy outcomes and early childhood health risks.
+
+A key aspect of this research involves analyzing the distribution of midwives across departments using RPPS data compiled by DREES. Midwives play a important role in prenatal care, childbirth, and postpartum support, and their availability can significantly impact the quality and accessibility of maternal health services. Departments with fewer midwives relative to their population face challenges in providing adequate care to expectant mothers and newborns, so it could potentially contribute to higher infant mortality rates.
+
+The project seeks to identify the factors most closely associated with variations in infant mortality. The objective is not only to describe regional disparities but also to understand their root causes. 
 
 ### Data cleaning description
+
+
 
