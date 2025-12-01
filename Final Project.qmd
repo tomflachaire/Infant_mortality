@@ -17,15 +17,30 @@ https://www.insee.fr/fr/statistiques/7624538?sommaire=7624746&utm_
 With this link, we downloaded :
 
 - P3D – Indicateurs généraux de la population par département et région - Séries depuis 1990;
+- P1D – Évolution générale de la situation démographique par département et région - Séries depuis 1990
+- P2D – Mortalité infantile par département et région - Séries depuis 1990.
 
-- le P1D – Évolution générale de la situation démographique par département et région - Séries depuis 1990
+On the Data DREES website: https://data.drees.solidarites-sante.gouv.fr/explore/dataset/la-demographie-des-professionnels-de-sante-depuis-2012/information/
 
-- et le P2D – Mortalité infantile par département et région - Séries depuis 1990.
+We downloaded data on midwife demographics from 2012 to 2025.
 
-and we moved them to csv files only keeping the year 2019, the last year available before COVID, which might affect the result.
-
+Then, we moved them to csv files only keeping the year 2019, the last year available before COVID, which might affect the result.
 
 ### Description of the sources
+
+The data comes from French sources, the INSEE (National Institute of Statistics and Economic Studies) and the DREES (Directorate for Research, Studies, Evaluation, and Statistics).
+
+Infant Mortality provides department-level statistics on the number of deaths of children under one year old. These data, produced by INSEE and Santé publique France, help analyze regional disparities in infant health.
+
+Population Indicators include information on fertility, average maternal age at childbirth, and the proportion of births outside marriage, broken down by department and year.
+
+Demographic Situation contains data on marriages, population counts, nuptiality rates, birth rates, and natural population growth by department and year. 
+
+Midwives RPPS 2012–2025 tracks the number and density of registered midwives across French departments.
+
+### Basic information about each data file
+
+
 
 ### Research Question
 
