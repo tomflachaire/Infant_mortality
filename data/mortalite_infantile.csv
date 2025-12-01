@@ -1,0 +1,135 @@
+﻿TABLEAU P2D - MORTALITÉ INFANTILE PAR DÉPARTEMENT ET RÉGION;;;;;;
+Année 2019;;;;;;
+;;;;;;
+;;;;;Taux de mortalité;
+Départements et régions;Nés vivants (a);Décédés de moins d'un an (b);Décédés de moins de 7 jours (b);Décédés de moins de 28 jours (b);Infantile (c);Néonatale (d)
+Paris;27 373;97;52;75;3,5;2,7
+Seine-et-Marne;18 585;60;36;47;3,2;2,5
+Yvelines;18 550;60;31;44;3,2;2,4
+Essonne;18 520;67;26;44;3,6;2,4
+Hauts-de-Seine;22 251;71;36;51;3,2;2,3
+Seine-Saint-Denis;28 456;148;79;106;5,2;3,7
+Val-de-Marne;20 399;106;60;84;5,2;4,1
+Val-d'Oise;19 758;90;50;64;4,6;3,2
+Ile-de-France;173 892;699;370;515;4,0;3,0
+Cher;2 771;11;3;5;4,0;1,8
+Eure-et-Loir;4 583;23;11;13;5,0;2,8
+Indre;1 773;4;3;3;2,3;1,7
+Indre-et-Loire;5 970;34;20;23;5,7;3,9
+Loir-et-Cher;2 936;9;4;6;3,1;2,0
+Loiret;7 819;30;14;20;3,8;2,6
+Centre-Val de Loire;25 852;111;55;70;4,3;2,7
+Côte-d Or;5 062;15;8;12;3,0;2,4
+Nièvre;1 522;8;4;5;5,3;3,3
+Saône-et-Loire;4 742;12;4;6;2,5;1,3
+Yonne;3 172;8;3;4;2,5;1,3
+Doubs;5 757;33;16;28;5,7;4,9
+Jura;2 364;15;8;10;6,3;4,2
+Haute-Saône;2 044;3;2;2;1,5;1,0
+Territoire de Belfort;1 451;5;4;5;3,4;3,4
+Bourgogne-Franche-Comté;26 114;99;49;72;3,8;2,8
+Eure;6 175;24;13;15;3,9;2,4
+Seine-Maritime;14 044;58;30;42;4,1;3,0
+Calvados;6 621;18;12;16;2,7;2,4
+Manche;4 403;15;7;11;3,4;2,5
+Orne;2 349;7;5;5;3,0;2,1
+Normandie;33 592;122;67;89;3,6;2,6
+Nord;31 096;110;47;68;3,5;2,2
+Pas-de-Calais;15 590;57;34;46;3,7;3,0
+Aisne;5 394;22;13;19;4,1;3,5
+Oise;9 509;27;12;22;2,8;2,3
+Somme;5 591;14;5;9;2,5;1,6
+Hauts-de-France;67 180;230;111;164;3,4;2,4
+Meurthe-et-Moselle;7 003;29;11;21;4,1;3,0
+Meuse;1 551;2;1;1;1,3;0,6
+Moselle;10 232;41;20;30;4,0;2,9
+Vosges;3 123;9;3;5;2,9;1,6
+Bas-Rhin;12 019;30;16;24;2,5;2,0
+Haut-Rhin;7 705;22;10;13;2,9;1,7
+Ardennes;2 566;7;5;5;2,7;1,9
+Aube;3 107;19;10;14;6,1;4,5
+Marne;6 113;31;17;23;5,1;3,8
+Haute-Marne;1 424;4;1;2;2,8;1,4
+Grand Est;54 843;194;94;138;3,5;2,5
+Loire-Atlantique;16 221;39;24;35;2,4;2,2
+Maine-et-Loire;8 483;32;17;23;3,8;2,7
+Mayenne;3 003;11;4;7;3,7;2,3
+Sarthe;5 749;24;9;12;4,2;2,1
+Vendée;5 973;13;7;9;2,2;1,5
+Pays de la Loire;39 429;119;61;86;3,0;2,2
+Côtes-d'Armor;5 132;16;6;11;3,1;2,1
+Finistère;7 975;25;16;21;3,1;2,6
+Ille-et-Vilaine;11 639;45;24;32;3,9;2,7
+Morbihan;6 661;14;7;11;2,1;1,7
+Bretagne;31 407;100;53;75;3,2;2,4
+Dordogne;2 972;10;6;7;3,4;2,4
+Gironde;16 955;57;28;45;3,4;2,7
+Landes;3 483;11;6;10;3,2;2,9
+Lot-et-Garonne;2 984;9;6;7;3,0;2,3
+Pyrénées-Atlantiques;5 893;26;11;18;4,4;3,1
+Charente;2 987;4;2;2;1,3;0,7
+Charente-Maritime;5 149;18;13;14;3,5;2,7
+Deux-Sèvres;3 347;15;8;10;4,5;3,0
+Vienne;4 084;9;6;7;2,2;1,7
+Corrèze;1 831;8;3;5;4,4;2,7
+Creuse;772;4;3;3;5,2;3,9
+Haute-Vienne;3 406;15;7;10;4,4;2,9
+Nouvelle-Aquitaine;53 863;186;99;138;3,5;2,6
+Ariège;1 205;4;4;4;3,3;3,3
+Aveyron;2 175;9;6;7;4,1;3,2
+Haute-Garonne;15 870;50;31;38;3,2;2,4
+Gers;1 388;6;5;6;4,3;4,3
+Lot;1 230;2;1;1;1,6;0,8
+Hautes-Pyrénées;1 824;3;2;3;1,6;1,6
+Tarn;3 345;6;5;6;1,8;1,8
+Tarn-et-Garonne;2 555;6;2;3;2,3;1,2
+Aude;3 205;4;1;3;1,2;0,9
+Gard;7 484;30;17;24;4,0;3,2
+Hérault;12 488;43;21;33;3,4;2,6
+Lozère;578;4;1;3;6,9;5,2
+Pyrénées-Orientales;4 319;16;8;10;3,7;2,3
+Occitanie;57 666;183;104;141;3,2;2,4
+Ain;6 907;18;11;15;2,6;2,2
+Ardèche;2 982;15;8;9;5,0;3,0
+Drôme;5 476;12;6;9;2,2;1,6
+Isère;13 925;49;21;28;3,5;2,0
+Loire;8 404;26;14;17;3,1;2,0
+Rhône;25 152;92;51;66;3,7;2,6
+Savoie;4 383;12;8;10;2,7;2,3
+Haute-Savoie;9 823;32;22;26;3,3;2,6
+Allier;2 777;12;5;7;4,3;2,5
+Cantal;1 016;0;0;0;0,0;0,0
+Haute-Loire;1 957;2;1;2;1,0;1,0
+Puy-de-Dôme;6 424;26;18;23;4,0;3,6
+Auvergne-Rhône-Alpes;89 226;296;165;212;3,3;2,4
+Alpes-de-Haute-Provence;1 369;2;0;0;1,5;0,0
+Hautes-Alpes;1 221;5;1;2;4,1;1,6
+Alpes-Maritimes;11 580;34;15;25;2,9;2,2
+Bouches-du-Rhône;25 288;87;38;65;3,4;2,6
+Var;10 516;27;13;21;2,6;2,0
+Vaucluse;6 315;17;5;10;2,7;1,6
+Provence-Alpes-Côte d'Azur;56 289;172;72;123;3,1;2,2
+Corse-du-Sud;1 348;6;1;3;4,5;2,2
+Haute-Corse;1 503;5;3;4;3,3;2,7
+Corse;2 851;11;4;7;3,9;2,5
+Sous-total métropole (e);712 204;2 522;1 304;1 830;3,5;2,6
+Guadeloupe;4 601;29;11;18;6,3;3,9
+Martinique;3 749;25;12;20;6,7;5,3
+Guyane;8 104;79;42;56;9,7;6,9
+La Réunion;13 171;96;63;77;7,3;5,8
+Mayotte (f);9 768;83;33;50;8,5;5,1
+Départements et régions d'Outre Mer;39 393;312;161;221;7,9;5,6
+Autres;1 786;23;9;15;.;.
+France métropolitaine (g);714 029;2 540;1 312;1 842;3,6;2,6
+France (h);753 383;2 857;1 474;2 066;3,8;2,7
+;;;;;;
+a. Département de domicile de la mère;;;;;;
+b. Département de domicile du décédé;;;;;;
+c. Décès d'enfants de moins d'un an pour 1 000 enfants nés vivants;;;;;;
+d. Décès d'enfants de moins de 28 jours pour 1 000 enfants nés vivants;;;;;;
+e. Sous-total des événements concernant des personnes (mères de nouveau-nés ou enfants décédés) résidant en France métropolitaine;;;;;;
+f. Les indicateurs concernant la mortalité à Mayotte sont diffusés mais sont peu fiables. En effet, pour ce département, les données sur les décès sont à considérer prudemment car elles sont probablement sous-estimées.;;;;;;
+g. Sous-total des événements ayant eu lieu en France métropolitaine. Certaines personnes (mères de nouveau-nés en Métropole ou enfants décédés en Métropole) peuvent ne pas résider en Métropole;;;;;;
+h. Total des événements ayant eu lieu en France (96 départements métropolitains + 5 départements d'outre-mer). Certaines personnes (mères de nouveau-nés en France ou enfants décédés en France) peuvent ne pas résider en France (voir ligne Autres);;;;;;
+Champ : France inclus Mayotte;;;;;;
+Source : Insee, estimations de population et statistiques de l'état civil;;;;;;
