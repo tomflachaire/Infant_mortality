@@ -74,3 +74,50 @@ infant_mortality <- read_csv2(
   ) %>%
   filter(!is.na(`Décédés de moins d'un an (b)`))  # Supprime les lignes avec NA
 
+
+# Exclure les totaux régionaux
+infant_mortality_dept <- infant_mortality %>%
+  filter(
+    !grepl("France|métropole|Sous-total|Outre Mer", `Départements et régions`, ignore.case = TRUE),
+    !`Départements et régions` %in% c("Ile-de-France", "Centre-Val de Loire", 
+                                       "Bourgogne-Franche-Comté", "Normandie",
+                                       "Hauts-de-France", "Grand Est", 
+                                       "Pays de la Loire", "Bretagne",
+                                       "Nouvelle-Aquitaine", "Occitanie",
+                                       "Auvergne-Rhône-Alpes", "Provence-Alpes-Côte d'Azur",
+                                       "Corse")
+  )
+
+# Top 5 et Bottom 5 DÉPARTEMENTS uniquement
+top5 <- infant_mortality_dept %>%
+  arrange(desc(`Décédés de moins d'un an (b)`)) %>%
+  slice(1:5)
+
+bottom5 <- infant_mortality_dept %>%
+  arrange(`Décédés de moins d'un an (b)`) %>%
+  slice(1:5)
+
+top_bottom <- bind_rows(
+  top5 %>% mutate(categorie = "Plus élevé"),
+  bottom5 %>% mutate(categorie = "Plus faible")
+)
+
+# Graphique 
+ggplot(top_bottom, 
+       aes(x = reorder(`Départements et régions`, `Décédés de moins d'un an (b)`), 
+           y = `Décédés de moins d'un an (b)`,
+           fill = categorie)) +
+  geom_col() +
+  geom_text(aes(label = `Décédés de moins d'un an (b)`), 
+            hjust = -0.2, size = 3.5) +  # Ajoute les valeurs
+  scale_fill_manual(values = c("Plus élevé" = "coral", "Plus faible" = "steelblue")) +
+  scale_y_continuous(expand = expansion(mult = c(0, 0.1))) +  # Plus d'espace à droite
+  coord_flip() +
+  labs(title = "Décès de moins d'un an par département (2019)",
+       subtitle = "5 départements avec le plus et le moins de décès",
+       y = "Nombre de décès", 
+       x = NULL,
+       fill = NULL) +
+  theme_minimal() +
+  theme(legend.position = "top")
+```
