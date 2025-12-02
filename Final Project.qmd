@@ -26,7 +26,7 @@ We downloaded data on midwife demographics from 2012 to 2025.
 
 Then, we moved them to csv files only keeping the year 2019, the last year available before COVID, which might affect the result.
 
-### Description of the sources
+### Description of the sources and important variables
 
 The data comes from French sources, the INSEE (National Institute of Statistics and Economic Studies) and the DREES (Directorate for Research, Studies, Evaluation, and Statistics).
 
@@ -57,4 +57,20 @@ The project aims to identify the factors most closely associated with variations
 We only kept data from 2019, the most recent year available before covid that could influence our results. 
 
 
+### Main target variable
+
+```{r}
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(here)
+infant_mortality <- read_csv2(
+  here("data/mortalite_infantile.csv"),
+  skip = 4
+) %>%
+  mutate(
+    `Nés vivants (a)` = as.numeric(gsub(" ", "", `Nés vivants (a)`)),
+    `Décédés de moins d'un an (b)` = as.numeric(gsub(" ", "", `Décédés de moins d'un an (b)`))
+  ) %>%
+  filter(!is.na(`Décédés de moins d'un an (b)`))  # Supprime les lignes avec NA
 
