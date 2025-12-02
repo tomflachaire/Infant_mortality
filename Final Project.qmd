@@ -64,17 +64,22 @@ We created a graph to visualize our main target variable, which is infant mortal
 library(readr)
 library(dplyr)
 library(ggplot2)
+library(knitr)
 library(here)
 infant_mortality <- read_csv2(
   here("data/mortalite_infantile.csv"),
   skip = 4
 ) %>%
-  mutate(
+ mutate(
+    # Convert all numeric columns to numeric type
     `Nés vivants (a)` = as.numeric(gsub(" ", "", `Nés vivants (a)`)),
-    `Décédés de moins d'un an (b)` = as.numeric(gsub(" ", "", `Décédés de moins d'un an (b)`))
+    `Décédés de moins d'un an (b)` = as.numeric(gsub(" ", "", `Décédés de moins d'un an (b)`)),
+    `Décédés de moins de 7 jours (b)` = as.numeric(gsub(" ", "", `Décédés de moins de 7 jours (b)`)),
+    `Décédés de moins de 28 jours (b)` = as.numeric(gsub(" ", "", `Décédés de moins de 28 jours (b)`)),
+    `Infantile (c)` = as.numeric(gsub(",", ".", `Infantile (c)`)),
+    `Néonatale (d)` = as.numeric(gsub(",", ".", `Néonatale (d)`))
   ) %>%
   filter(!is.na(`Décédés de moins d'un an (b)`))  # Supprime les lignes avec NA
-
 
 # Exclure les totaux régionaux
 infant_mortality_dept <- infant_mortality %>%
@@ -122,3 +127,11 @@ ggplot(top_bottom,
   theme_minimal() +
   theme(legend.position = "top")
 ```
+
+### Data Preparation and Cleaning
+
+We imported the infant mortality dataset from a CSV file using the `read_csv2()` function. 
+The file contained data in the first four rows (title, year, and empty lines), 
+which we skipped using the `skip = 4` parameter to start reading from the actual column headers. We filtered out rows containing NA values in the variables. We excluded regional totals and national aggregates to ensured we only kept individual department-level observations. 
+
+All columns were initially imported as character type due to formatting issues so we converted the mortality count variable to numeric using `as.numeric()`, then we removed spaces from numbers (e.g., "27 373" → "27373") using `gsub(" ", "", ...)`.
