@@ -40,7 +40,33 @@ Midwives RPPS 2012–2025 tracks the number and density of registered midwives a
 
 ### Basic information about each data file
 
+```{r}
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(knitr)
+library(here)
+```
 
+```{r}
+# Function to extract basic information
+get_data_info <- function(file_path) {
+  data <- read.csv2(file_path)
+  list(
+    Fichier = basename(file_path),
+    Lignes = nrow(data),
+    Colonnes = ncol(data),
+    Noms_des_colonnes = paste(colnames(data), collapse = ", ")  # Convert to string
+  )
+}
+
+data_info <- lapply(data_files, get_data_info) # Apply the function to each file
+data_info_df <- do.call(rbind.data.frame, data_info) # Convert the list to a data.frame
+rownames(data_info_df) <- NULL
+
+# Display the result
+print(data_info_df)
+```
 
 ### Research Question
 
@@ -61,11 +87,6 @@ We only kept data from 2019, the most recent year available before covid that co
 We created a graph to visualize our main target variable, which is infant mortality. We kept the five departments with the highest and lowest mortality rates for this graph, to show that there are huge disparities between departments in 2019.
 
 ```{r}
-library(readr)
-library(dplyr)
-library(ggplot2)
-library(knitr)
-library(here)
 infant_mortality <- read_csv2(
   here("data/mortalite_infantile.csv"),
   skip = 4
@@ -81,7 +102,7 @@ infant_mortality <- read_csv2(
   ) %>%
   filter(!is.na(`Décédés de moins d'un an (b)`))  # Supprime les lignes avec NA
 
-# Exclure les totaux régionaux
+# we exclude regional total
 infant_mortality_dept <- infant_mortality %>%
   filter(
     !grepl("France|métropole|Sous-total|Outre Mer", `Départements et régions`, ignore.case = TRUE),
@@ -94,7 +115,10 @@ infant_mortality_dept <- infant_mortality %>%
                                        "Corse")
   )
 
-# Top 5 et Bottom 5 DÉPARTEMENTS uniquement
+```
+
+```{r}
+# Top 5 and Bottom 5 departments
 top5 <- infant_mortality_dept %>%
   arrange(desc(`Décédés de moins d'un an (b)`)) %>%
   slice(1:5)
@@ -108,7 +132,7 @@ top_bottom <- bind_rows(
   bottom5 %>% mutate(categorie = "Plus faible")
 )
 
-# Graphique 
+# Graphical representation
 ggplot(top_bottom, 
        aes(x = reorder(`Départements et régions`, `Décédés de moins d'un an (b)`), 
            y = `Décédés de moins d'un an (b)`,
