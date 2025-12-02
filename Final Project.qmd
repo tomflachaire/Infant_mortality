@@ -59,6 +59,8 @@ We only kept data from 2019, the most recent year available before covid that co
 
 ### Main target variable
 
+We created a graph to visualize our main target variable, which is infant mortality. We kept the five departments with the highest and lowest mortality rates for this graph, to show that there are huge disparities between departments in 2019.
+
 ```{r}
 library(readr)
 library(dplyr)
