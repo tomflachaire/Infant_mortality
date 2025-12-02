@@ -44,7 +44,7 @@ Midwives RPPS 2012–2025 tracks the number and density of registered midwives a
 
 ### Research Question
 
-#### Why does infant mortality vary so much across French departments?
+Why does infant mortality vary so much across French departments?
 
 This project examines the factors that can explain variations in infant mortality rates across French departments. We will look at the role of demographic characteristics and access to maternal healthcare. While France performs relatively well in terms of infant health at the national level, there are huge territorial disparities. Some departments consistently have higher infant mortality rates than others, raising questions about the causes of these differences.
 
@@ -55,7 +55,6 @@ A key aspect of this research is the distribution of midwives across departments
 The project aims to identify the factors most closely associated with variations in infant mortality. The objective is not only to describe regional disparities but also to understand their causes. 
 
 We only kept data from 2019, the most recent year available before covid that could influence our results. 
-
 
 ### Main target variable
 
