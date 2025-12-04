@@ -173,37 +173,104 @@ situation_demo <- situation_demo %>%
   )
 ```
 
+Now we do the data cleaning and joining for the DRESS data about midwives :
+
+```{r}
+
+midwives_workforce_complete <- read.csv2(here("data/Sages-femmes_effectif.csv"), stringsAsFactors = FALSE)
+
+#We only keep year 2019. And we don't care about the ages, the sector of activities and the gender of our midwives.
+
+midwives_workforce <- midwives_workforce_complete %>%
+  filter(
+    secteur_activite == "00-Ensemble",
+    exercice == "0-Ensemble",
+    tranche_age == "00-Ensemble",
+    sexe == "0-Ensemble"
+  ) %>%
+  select(departement, effectif_2019)
+
+
+#We delete the "Ensemble ligns that we won't use later.
+midwives_workforce <- midwives_workforce %>%
+  filter(!grepl("Ensemble", departement))
+
+# We clean the name of the departments which was "075-PARIS" because in our other datasets it's only "Paris".
+  
+midwives_workforce <- midwives_workforce %>%
+  mutate(departement = sub("^\\d+\\s*-", "", departement))
+```
+
+
+```{r}
+
+# we do exactly the same for the midwives density.
+midwives_density_complete <- read.csv2(here("data/Sages-femmes_densité.csv"), stringsAsFactors = FALSE)
+
+midwives_density <- midwives_density_complete %>%
+  filter(
+    secteur_activite == "00-Ensemble",
+    exercice == "0-Ensemble",
+    tranche_age == "00-Ensemble",
+    sexe == "0-Ensemble"
+  ) %>%
+  select(departement, densite_2019)
+
+midwives_density <- midwives_density %>%
+  filter(!grepl("Ensemble", departement))
+
+midwives_density <- midwives_density %>%
+  mutate(departement = sub("^\\d+\\s*-", "", departement))
+```
+
+
+```{r}
+#We join the 2 datasets to have only one for midwives : 
+
+midwives <- inner_join(midwives_density, midwives_workforce, by = "departement")
+
+midwives <- midwives %>%
+  select(departement, effectif_2019, densite_2019)
+```
+
+
 ### Main target variable
 
 ```{r}
-infant_mortality <- read_csv2(
-  here("data/mortalite_infantile.csv"),
-  skip = 4
-) %>%
- mutate(
-# Convert all numeric columns to numeric type since R doesn't necessarly understand it at first.
-    `Nés vivants (a)` = parse_number(`Nés vivants (a)`, locale = locale(decimal_mark = ",", grouping_mark = " ")),
-    `Décédés de moins d'un an (b)` = parse_number(`Décédés de moins d'un an (b)`, locale = locale(decimal_mark = ",", grouping_mark = " ")),
-    `Décédés de moins de 7 jours (b)` = parse_number(`Décédés de moins de 7 jours (b)`, locale = locale(decimal_mark = ",", grouping_mark = " ")),
-    `Décédés de moins de 28 jours (b)` = parse_number(`Décédés de moins de 28 jours (b)`, locale = locale(decimal_mark = ",", grouping_mark = " ")),
-    `Infantile (c)` = parse_number(`Infantile (c)`, locale = locale(decimal_mark = ",", grouping_mark = " ")),
-    `Néonatale (d)` = parse_number(`Néonatale (d)`, locale = locale(decimal_mark = ",", grouping_mark = " "))
-  ) %>%
-  filter(!is.na(`Décédés de moins d'un an (b)`))  
+# To ilustrate our infant mortality variable, we will show the difference between top 5 and bottom 5 departements. Showing all 101 departement in one graph would be ugly.
 
-#We are deleting the ligns with no values.
+#this is how we isolate the top and bottom 5
 
-# we exclude regional total since we care about departments.
-infant_mortality_dept <- infant_mortality %>%
-  filter(
-    !grepl("France|métropole|Sous-total|Outre Mer", `Départements et régions`, ignore.case = TRUE),
-    !`Départements et régions` %in% c("Ile-de-France", "Centre-Val de Loire", 
-                                       "Bourgogne-Franche-Comté", "Normandie",
-                                       "Hauts-de-France", "Grand Est", 
-                                       "Pays de la Loire", "Bretagne",
-                                       "Nouvelle-Aquitaine", "Occitanie",
-                                       "Auvergne-Rhône-Alpes", "Provence-Alpes-Côte d'Azur",
-                                       "Corse")
-  )
+top5 <- infant_mortality_dept %>%
+  arrange(desc(`Décédés de moins d'un an (b)`)) %>%
+  slice(1:5)
+
+bottom5 <- infant_mortality_dept %>%
+  arrange(`Décédés de moins d'un an (b)`) %>%
+  slice(1:5)
+
+top_bottom <- bind_rows(
+  top5 %>% mutate(categorie = "Plus élevé"),
+  bottom5 %>% mutate(categorie = "Plus faible")
+)
+
+# and the graphical representation
+ggplot(top_bottom, 
+       aes(x = reorder(`Départements et régions`, `Décédés de moins d'un an (b)`), 
+           y = `Décédés de moins d'un an (b)`,
+           fill = categorie)) +
+  geom_col() +
+  geom_text(aes(label = `Décédés de moins d'un an (b)`), 
+            hjust = -0.2, size = 3.5) +  
+  scale_fill_manual(values = c("Plus élevé" = "coral", "Plus faible" = "steelblue")) +
+  scale_y_continuous(expand = expansion(mult = c(0, 0.1))) +  # Plus d'espace à droite
+  coord_flip() +
+  labs(title = "Death of less than 1y per department (2019)",
+       subtitle = "top 5 and bottom 5",
+       y = "Number of deaths", 
+       x = NULL,
+       fill = NULL) +
+  theme_minimal() +
+  theme(legend.position = "top")
 ```
 
