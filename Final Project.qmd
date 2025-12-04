@@ -60,6 +60,7 @@ get_data_info <- function(file_path) {
   )
 }
 
+data_files <- list.files(path = "data/", pattern = "\\.csv$", full.names = TRUE)
 data_info <- lapply(data_files, get_data_info) # Apply the function to each file
 data_info_df <- do.call(rbind.data.frame, data_info) # Convert the list to a data.frame
 rownames(data_info_df) <- NULL
