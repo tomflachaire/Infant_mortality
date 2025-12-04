@@ -233,11 +233,11 @@ midwives <- midwives %>%
   select(departement, effectif_2019, densite_2019)
 ```
 
-
 ### Main target variable
 
+To ilustrate our infant mortality variable, we will show the difference between top 5 and bottom 5 departements. Showing all 101 departements in one graph would be ugly.
+
 ```{r}
-# To ilustrate our infant mortality variable, we will show the difference between top 5 and bottom 5 departements. Showing all 101 departement in one graph would be ugly.
 
 #this is how we isolate the top and bottom 5
 
