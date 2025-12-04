@@ -56,13 +56,13 @@ get_data_info <- function(file_path) {
     Fichier = basename(file_path),
     Lignes = nrow(data),
     Colonnes = ncol(data),
-    Noms_des_colonnes = paste(colnames(data), collapse = ", ")  # Convert to string
+    Noms_des_colonnes = paste(colnames(data), collapse = ", ")
   )
 }
 
 data_files <- list.files(path = "data/", pattern = "\\.csv$", full.names = TRUE)
-data_info <- lapply(data_files, get_data_info) # Apply the function to each file
-data_info_df <- do.call(rbind.data.frame, data_info) # Convert the list to a data.frame
+data_info <- lapply(data_files, get_data_info) 
+data_info_df <- do.call(rbind.data.frame, data_info) 
 rownames(data_info_df) <- NULL
 
 # Display the result
@@ -86,12 +86,13 @@ We only kept data from 2019, the most recent year available before covid that co
 ### Data Preparation and Cleaning
 
 ```{r}
+
 infant_mortality <- read_csv2(
   here("data/mortalite_infantile.csv"),
   skip = 4
 ) %>%
  mutate(
-# Convert all numeric columns to numeric type
+# Convert all numeric columns to numeric type since R doesn't necessarly understand it at first.
     `Nés vivants (a)` = parse_number(`Nés vivants (a)`, locale = locale(decimal_mark = ",", grouping_mark = " ")),
     `Décédés de moins d'un an (b)` = parse_number(`Décédés de moins d'un an (b)`, locale = locale(decimal_mark = ",", grouping_mark = " ")),
     `Décédés de moins de 7 jours (b)` = parse_number(`Décédés de moins de 7 jours (b)`, locale = locale(decimal_mark = ",", grouping_mark = " ")),
@@ -99,10 +100,12 @@ infant_mortality <- read_csv2(
     `Infantile (c)` = parse_number(`Infantile (c)`, locale = locale(decimal_mark = ",", grouping_mark = " ")),
     `Néonatale (d)` = parse_number(`Néonatale (d)`, locale = locale(decimal_mark = ",", grouping_mark = " "))
   ) %>%
-  filter(!is.na(`Décédés de moins d'un an (b)`))  # Supprime les lignes avec NA
+  filter(!is.na(`Décédés de moins d'un an (b)`))  
 
-# we exclude regional total
-infant_mortality <- infant_mortality %>%
+#We are deleting the ligns with no values.
+
+# we exclude regional total since we care about departments.
+infant_mortality_dept <- infant_mortality %>%
   filter(
     !grepl("France|métropole|Sous-total|Outre Mer", `Départements et régions`, ignore.case = TRUE),
     !`Départements et régions` %in% c("Ile-de-France", "Centre-Val de Loire", 
@@ -131,7 +134,7 @@ indicateurs_generaux <- read_csv2(
   here("data/indicateurs_population.csv"),
   skip = 3
 ) %>%
-  filter(!is.na(`Indicateur conjoncturel de fécondité (a)`))  # Remove rows with NA
+  filter(!is.na(`Indicateur conjoncturel de fécondité (a)`))
 
 # Keep only departments (exclude regional totals)
 indicateurs_generaux <- indicateurs_generaux %>%
@@ -154,7 +157,7 @@ situation_demo <- read_csv2(
   here("data/situation_demographique.csv"),
   skip = 4
 ) %>%
-  filter(!is.na(`Population moyenne`))  # Remove rows with NA
+  filter(!is.na(`Population moyenne`)) 
 
 # Keep only departments (exclude regional totals)
 situation_demo <- situation_demo %>%
@@ -173,37 +176,34 @@ situation_demo <- situation_demo %>%
 ### Main target variable
 
 ```{r}
-# Top 5 and Bottom 5 departments
-top5 <- infant_mortality %>%
-  arrange(desc(`Décédés de moins d'un an (b)`)) %>%
-  slice(1:5)
+infant_mortality <- read_csv2(
+  here("data/mortalite_infantile.csv"),
+  skip = 4
+) %>%
+ mutate(
+# Convert all numeric columns to numeric type since R doesn't necessarly understand it at first.
+    `Nés vivants (a)` = parse_number(`Nés vivants (a)`, locale = locale(decimal_mark = ",", grouping_mark = " ")),
+    `Décédés de moins d'un an (b)` = parse_number(`Décédés de moins d'un an (b)`, locale = locale(decimal_mark = ",", grouping_mark = " ")),
+    `Décédés de moins de 7 jours (b)` = parse_number(`Décédés de moins de 7 jours (b)`, locale = locale(decimal_mark = ",", grouping_mark = " ")),
+    `Décédés de moins de 28 jours (b)` = parse_number(`Décédés de moins de 28 jours (b)`, locale = locale(decimal_mark = ",", grouping_mark = " ")),
+    `Infantile (c)` = parse_number(`Infantile (c)`, locale = locale(decimal_mark = ",", grouping_mark = " ")),
+    `Néonatale (d)` = parse_number(`Néonatale (d)`, locale = locale(decimal_mark = ",", grouping_mark = " "))
+  ) %>%
+  filter(!is.na(`Décédés de moins d'un an (b)`))  
 
-bottom5 <- infant_mortality %>%
-  arrange(`Décédés de moins d'un an (b)`) %>%
-  slice(1:5)
+#We are deleting the ligns with no values.
 
-top_bottom <- bind_rows(
-  top5 %>% mutate(categorie = "Plus élevé"),
-  bottom5 %>% mutate(categorie = "Plus faible")
-)
-
-# Graphical representation
-ggplot(top_bottom, 
-       aes(x = reorder(`Départements et régions`, `Décédés de moins d'un an (b)`), 
-           y = `Décédés de moins d'un an (b)`,
-           fill = categorie)) +
-  geom_col() +
-  geom_text(aes(label = `Décédés de moins d'un an (b)`), 
-            hjust = -0.2, size = 3.5) +  # Ajoute les valeurs
-  scale_fill_manual(values = c("Plus élevé" = "coral", "Plus faible" = "steelblue")) +
-  scale_y_continuous(expand = expansion(mult = c(0, 0.1))) +  # Plus d'espace à droite
-  coord_flip() +
-  labs(title = "Décès de moins d'un an par département (2019)",
-       subtitle = "5 départements avec le plus et le moins de décès",
-       y = "Nombre de décès", 
-       x = NULL,
-       fill = NULL) +
-  theme_minimal() +
-  theme(legend.position = "top")
+# we exclude regional total since we care about departments.
+infant_mortality_dept <- infant_mortality %>%
+  filter(
+    !grepl("France|métropole|Sous-total|Outre Mer", `Départements et régions`, ignore.case = TRUE),
+    !`Départements et régions` %in% c("Ile-de-France", "Centre-Val de Loire", 
+                                       "Bourgogne-Franche-Comté", "Normandie",
+                                       "Hauts-de-France", "Grand Est", 
+                                       "Pays de la Loire", "Bretagne",
+                                       "Nouvelle-Aquitaine", "Occitanie",
+                                       "Auvergne-Rhône-Alpes", "Provence-Alpes-Côte d'Azur",
+                                       "Corse")
+  )
 ```
 
