@@ -179,7 +179,7 @@ Now we do the data cleaning and joining for the DRESS data about midwives :
 
 midwives_workforce_complete <- read.csv2(here("data/Sages-femmes_effectif.csv"), stringsAsFactors = FALSE)
 
-#We only keep year 2019. And we don't care about the ages, the sector of activities and the gender of our midwives.
+# We only keep year 2019. And we don't care about the ages, the sector of activities and the gender of our midwives.
 
 midwives_workforce <- midwives_workforce_complete %>%
   filter(
@@ -191,7 +191,7 @@ midwives_workforce <- midwives_workforce_complete %>%
   select(departement, effectif_2019)
 
 
-#We delete the "Ensemble ligns that we won't use later.
+# We delete the "Ensemble ligns that we won't use later.
 midwives_workforce <- midwives_workforce %>%
   filter(!grepl("Ensemble", departement))
 
@@ -225,7 +225,7 @@ midwives_density <- midwives_density %>%
 
 
 ```{r}
-#We join the 2 datasets to have only one for midwives : 
+# We join the 2 datasets to have only one for midwives : 
 
 midwives <- inner_join(midwives_density, midwives_workforce, by = "departement")
 
@@ -239,7 +239,7 @@ To illustrate our infant mortality variable, we will show the difference between
 
 ```{r}
 
-#this is how we isolate the top and bottom 5
+# this is how we isolate the top and bottom 5
 
 top5 <- infant_mortality %>%
   arrange(desc(`Décédés de moins d'un an (b)`)) %>%
@@ -273,3 +273,5 @@ ggplot(top_bottom,
   theme_minimal() +
   theme(legend.position = "top")
 ```
+
+
