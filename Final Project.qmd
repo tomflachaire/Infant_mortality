@@ -159,4 +159,25 @@ We imported the infant mortality dataset from a CSV file using the `read_csv2()`
 The file contained data in the first four rows (title, year, and empty lines), 
 which we skipped using the `skip = 4` parameter to start reading from the actual column headers. We filtered out rows containing NA values in the variables. We excluded regional totals and national aggregates to ensured we only kept individual department-level observations. 
 
-All columns were initially imported as character type due to formatting issues so we converted the mortality count variable to numeric using `as.numeric()`, then we removed spaces from numbers (e.g., "27 373" → "27373") using `gsub(" ", "", ...)`.
+All columns were initially imported as character type due to formatting issues so we converted the mortality count variable to numeric using `parse_number`.
+
+Now let's clean the other databases.
+
+```{r}
+indicateurs_generaux <- read_csv2(
+  here("data/indicateurs_population.csv"),
+  skip = 3
+) 
+# Keep only departments (exclude regional totals)
+indicateurs_generaux_dept <- indicateurs_generaux %>%
+  filter(
+    !grepl("France|métropole|Sous-total|Outre Mer", `Départements et régions`, ignore.case = TRUE),
+    !`Départements et régions` %in% c("Ile-de-France", "Centre-Val de Loire", 
+                                       "Bourgogne-Franche-Comté", "Normandie",
+                                       "Hauts-de-France", "Grand Est", 
+                                       "Pays de la Loire", "Bretagne",
+                                       "Nouvelle-Aquitaine", "Occitanie",
+                                       "Auvergne-Rhône-Alpes", "Provence-Alpes-Côte d'Azur",
+                                       "Corse", "Départements et régions d'Outre Mer")
+  )
+```
