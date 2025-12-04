@@ -241,11 +241,11 @@ midwives <- midwives %>%
 
 #this is how we isolate the top and bottom 5
 
-top5 <- infant_mortality_dept %>%
+top5 <- infant_mortality %>%
   arrange(desc(`Décédés de moins d'un an (b)`)) %>%
   slice(1:5)
 
-bottom5 <- infant_mortality_dept %>%
+bottom5 <- infant_mortality %>%
   arrange(`Décédés de moins d'un an (b)`) %>%
   slice(1:5)
 
@@ -273,4 +273,3 @@ ggplot(top_bottom,
   theme_minimal() +
   theme(legend.position = "top")
 ```
-
