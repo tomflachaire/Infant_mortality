@@ -235,7 +235,7 @@ midwives <- midwives %>%
 
 ### Main target variable
 
-To ilustrate our infant mortality variable, we will show the difference between top 5 and bottom 5 departements. Showing all 101 departements in one graph would be ugly.
+To illustrate our infant mortality variable, we will show the difference between top 5 and bottom 5 departments. Showing all 101 departments in one graph would be ugly.
 
 ```{r}
 
