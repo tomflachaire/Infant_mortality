@@ -169,7 +169,9 @@ For indicateurs_generaux database :
 indicateurs_generaux <- read_csv2(
   here("data/indicateurs_population.csv"),
   skip = 3
-) 
+) %>%
+  filter(!is.na(`Indicateur conjoncturel de fécondité (a)`))  # Remove rows with NA
+
 # Keep only departments (exclude regional totals)
 indicateurs_generaux <- indicateurs_generaux %>%
   filter(
@@ -190,7 +192,9 @@ For situation_demographique database :
 situation_demo <- read_csv2(
   here("data/situation_demographique.csv"),
   skip = 4
-) 
+) %>%
+  filter(!is.na(`Population moyenne`))  # Remove rows with NA
+
 # Keep only departments (exclude regional totals)
 situation_demo <- situation_demo %>%
   filter(
