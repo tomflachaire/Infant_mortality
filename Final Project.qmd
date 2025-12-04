@@ -83,9 +83,7 @@ The project aims to identify the factors most closely associated with variations
 
 We only kept data from 2019, the most recent year available before covid that could influence our results. 
 
-### Main target variable
-
-We created a graph to visualize our main target variable, which is infant mortality. We kept the five departments with the highest and lowest mortality rates for this graph, to show that there are huge disparities between departments in 2019.
+### Data Preparation and Cleaning
 
 ```{r}
 infant_mortality <- read_csv2(
@@ -117,43 +115,6 @@ infant_mortality <- infant_mortality %>%
   )
 
 ```
-
-```{r}
-# Top 5 and Bottom 5 departments
-top5 <- infant_mortality %>%
-  arrange(desc(`Décédés de moins d'un an (b)`)) %>%
-  slice(1:5)
-
-bottom5 <- infant_mortality %>%
-  arrange(`Décédés de moins d'un an (b)`) %>%
-  slice(1:5)
-
-top_bottom <- bind_rows(
-  top5 %>% mutate(categorie = "Plus élevé"),
-  bottom5 %>% mutate(categorie = "Plus faible")
-)
-
-# Graphical representation
-ggplot(top_bottom, 
-       aes(x = reorder(`Départements et régions`, `Décédés de moins d'un an (b)`), 
-           y = `Décédés de moins d'un an (b)`,
-           fill = categorie)) +
-  geom_col() +
-  geom_text(aes(label = `Décédés de moins d'un an (b)`), 
-            hjust = -0.2, size = 3.5) +  # Ajoute les valeurs
-  scale_fill_manual(values = c("Plus élevé" = "coral", "Plus faible" = "steelblue")) +
-  scale_y_continuous(expand = expansion(mult = c(0, 0.1))) +  # Plus d'espace à droite
-  coord_flip() +
-  labs(title = "Décès de moins d'un an par département (2019)",
-       subtitle = "5 départements avec le plus et le moins de décès",
-       y = "Nombre de décès", 
-       x = NULL,
-       fill = NULL) +
-  theme_minimal() +
-  theme(legend.position = "top")
-```
-
-### Data Preparation and Cleaning
 
 We imported the infant mortality dataset from a CSV file using the `read_csv2()` function. 
 The file contained data in the first four rows (title, year, and empty lines), 
@@ -207,5 +168,42 @@ situation_demo <- situation_demo %>%
                                        "Auvergne-Rhône-Alpes", "Provence-Alpes-Côte d'Azur",
                                        "Corse", "Départements et régions d'Outre Mer")
   )
+```
+
+### Main target variable
+
+```{r}
+# Top 5 and Bottom 5 departments
+top5 <- infant_mortality %>%
+  arrange(desc(`Décédés de moins d'un an (b)`)) %>%
+  slice(1:5)
+
+bottom5 <- infant_mortality %>%
+  arrange(`Décédés de moins d'un an (b)`) %>%
+  slice(1:5)
+
+top_bottom <- bind_rows(
+  top5 %>% mutate(categorie = "Plus élevé"),
+  bottom5 %>% mutate(categorie = "Plus faible")
+)
+
+# Graphical representation
+ggplot(top_bottom, 
+       aes(x = reorder(`Départements et régions`, `Décédés de moins d'un an (b)`), 
+           y = `Décédés de moins d'un an (b)`,
+           fill = categorie)) +
+  geom_col() +
+  geom_text(aes(label = `Décédés de moins d'un an (b)`), 
+            hjust = -0.2, size = 3.5) +  # Ajoute les valeurs
+  scale_fill_manual(values = c("Plus élevé" = "coral", "Plus faible" = "steelblue")) +
+  scale_y_continuous(expand = expansion(mult = c(0, 0.1))) +  # Plus d'espace à droite
+  coord_flip() +
+  labs(title = "Décès de moins d'un an par département (2019)",
+       subtitle = "5 départements avec le plus et le moins de décès",
+       y = "Nombre de décès", 
+       x = NULL,
+       fill = NULL) +
+  theme_minimal() +
+  theme(legend.position = "top")
 ```
 
