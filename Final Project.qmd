@@ -93,13 +93,13 @@ infant_mortality <- read_csv2(
   skip = 4
 ) %>%
  mutate(
-    # Convert all numeric columns to numeric type
-    `Nés vivants (a)` = as.numeric(gsub(" ", "", `Nés vivants (a)`)),
-    `Décédés de moins d'un an (b)` = as.numeric(gsub(" ", "", `Décédés de moins d'un an (b)`)),
-    `Décédés de moins de 7 jours (b)` = as.numeric(gsub(" ", "", `Décédés de moins de 7 jours (b)`)),
-    `Décédés de moins de 28 jours (b)` = as.numeric(gsub(" ", "", `Décédés de moins de 28 jours (b)`)),
-    `Infantile (c)` = as.numeric(gsub(",", ".", `Infantile (c)`)),
-    `Néonatale (d)` = as.numeric(gsub(",", ".", `Néonatale (d)`))
+# Convert all numeric columns to numeric type
+    `Nés vivants (a)` = parse_number(`Nés vivants (a)`, locale = locale(decimal_mark = ",", grouping_mark = " ")),
+    `Décédés de moins d'un an (b)` = parse_number(`Décédés de moins d'un an (b)`, locale = locale(decimal_mark = ",", grouping_mark = " ")),
+    `Décédés de moins de 7 jours (b)` = parse_number(`Décédés de moins de 7 jours (b)`, locale = locale(decimal_mark = ",", grouping_mark = " ")),
+    `Décédés de moins de 28 jours (b)` = parse_number(`Décédés de moins de 28 jours (b)`, locale = locale(decimal_mark = ",", grouping_mark = " ")),
+    `Infantile (c)` = parse_number(`Infantile (c)`, locale = locale(decimal_mark = ",", grouping_mark = " ")),
+    `Néonatale (d)` = parse_number(`Néonatale (d)`, locale = locale(decimal_mark = ",", grouping_mark = " "))
   ) %>%
   filter(!is.na(`Décédés de moins d'un an (b)`))  # Supprime les lignes avec NA
 
